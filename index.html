@@ -22,25 +22,36 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden; /* Locks the screen, prevents scrolling */
+            width: 100vw;
+            overflow: hidden; 
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-font-smoothing: antialiased;
+            margin: 0;
+        }
+
+        /* The scaling wrapper ensures the deck stays 16:9 on any device */
+        #deck-wrapper {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            transform-origin: center center;
         }
 
         /* Presentation Engine Styles */
         .slide-container {
-            display: none; /* Hides all slides by default */
+            display: none; 
+            position: absolute;
+            top: 0;
+            left: 0;
             background-color: #ffffff;
             border-radius: 8px; 
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
             flex-direction: column;
-            height: 720px; 
-            width: 1280px; 
+            height: 100%; 
+            width: 100%; 
             padding: 60px 80px; 
-            position: relative;
         }
 
-        /* Active class to show the current slide with a fade-in effect */
         .slide-container.active {
             display: flex;
             animation: fadeIn 0.4s ease-out forwards;
@@ -155,7 +166,7 @@
             gap: 24px;
             width: 100%;
             height: 100%;
-            margin-bottom: 20px; /* Space for nav footer */
+            margin-bottom: 20px; 
         }
 
         .parm-card {
@@ -335,9 +346,11 @@
 
         /* PRINT STYLES FOR PDF EXPORT */
         @media print {
-            body { background-color: #ffffff; height: auto; overflow: visible; display: block; }
+            body { background-color: #ffffff; height: auto; overflow: visible; display: block; transform: none !important; }
+            #deck-wrapper { transform: none !important; width: 100%; height: auto; display: block; }
             .slide-container { 
-                display: flex !important; /* Force all slides to show for printing */
+                position: relative;
+                display: flex !important; 
                 box-shadow: none; border-radius: 0; margin: 0; padding: 40px; 
                 page-break-after: always; height: 720px;
                 -webkit-print-color-adjust: exact; print-color-adjust: exact;
@@ -348,357 +361,362 @@
 </head>
 <body>
 
-    <!-- Slide 1: Section Title -->
-    <div class="slide-container active" id="slide1">
-        <div class="section-title-layout">
-            <hr>
-            <h2>Proof of Execution</h2>
-            <p class="subtitle">Architecting Enterprise Compliance & Data Automation</p>
-            <p class="text">13 years of building the manual frameworks Complir is now automating.</p>
-            <button class="btn-start" onclick="goToSlide(2)">View Portfolio Dashboard <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
-        </div>
-    </div>
+    <!-- Scaling Wrapper added here -->
+    <div id="deck-wrapper">
 
-    <!-- Slide 2: Portfolio Index (Dashboard Layout) -->
-    <div class="slide-container" id="slide2">
-        <div class="index-header">
-            <div>
-                <h2>Proof of Execution: Choose Your Path</h2>
-                <p>13 years of building the exact frameworks Complir is now automating.</p>
+        <!-- Slide 1: Section Title -->
+        <div class="slide-container active" id="slide1">
+            <div class="section-title-layout">
+                <hr>
+                <h2>Proof of Execution</h2>
+                <p class="subtitle">Architecting Enterprise Compliance & Data Automation</p>
+                <p class="text">13 years of building the manual frameworks Complir is now automating.</p>
+                <button class="btn-start" onclick="goToSlide(2)">View Portfolio Dashboard <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
             </div>
-            <button class="btn-nav btn-primary" onclick="goToSlide(3)">Start Sequence <i class="fa-solid fa-play"></i></button>
         </div>
-        <div class="content-area">
-            <div class="index-grid">
-                <!-- Column 1 -->
-                <div class="index-column">
-                    <div class="index-column-header">Architecting the MVP</div>
-                    <div class="nav-item" onclick="goToSlide(3)">
-                        <div class="nav-item-title">The Marking Database <i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="nav-item-desc">Digitizing 1,000+ compliance markings into a web app.</div>
+
+        <!-- Slide 2: Portfolio Index (Dashboard Layout) -->
+        <div class="slide-container" id="slide2">
+            <div class="index-header">
+                <div>
+                    <h2>Proof of Execution: Choose Your Path</h2>
+                    <p>13 years of building the exact frameworks Complir is now automating.</p>
+                </div>
+                <button class="btn-nav btn-primary" onclick="goToSlide(3)">Start Sequence <i class="fa-solid fa-play"></i></button>
+            </div>
+            <div class="content-area">
+                <div class="index-grid">
+                    <!-- Column 1 -->
+                    <div class="index-column">
+                        <div class="index-column-header">Architecting the MVP</div>
+                        <div class="nav-item" onclick="goToSlide(3)">
+                            <div class="nav-item-title">The Marking Database <i class="fa-solid fa-chevron-right"></i></div>
+                            <div class="nav-item-desc">Digitizing 1,000+ compliance markings into a web app.</div>
+                        </div>
+                        <div class="nav-item" onclick="goToSlide(4)">
+                            <div class="nav-item-title">Growth Market Engine <i class="fa-solid fa-chevron-right"></i></div>
+                            <div class="nav-item-desc">Mapping local regulatory laws to product matrices.</div>
+                        </div>
+                        <div class="nav-item" onclick="goToSlide(5)">
+                            <div class="nav-item-title">The REP File <i class="fa-solid fa-chevron-right"></i></div>
+                            <div class="nav-item-desc">Automating complex European Eco-Tax decision trees.</div>
+                        </div>
                     </div>
-                    <div class="nav-item" onclick="goToSlide(4)">
-                        <div class="nav-item-title">Growth Market Engine <i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="nav-item-desc">Mapping local regulatory laws to product matrices.</div>
-                    </div>
-                    <div class="nav-item" onclick="goToSlide(5)">
-                        <div class="nav-item-title">The REP File <i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="nav-item-desc">Automating complex European Eco-Tax decision trees.</div>
-                    </div>
-                </div>
 
-                <!-- Column 2 -->
-                <div class="index-column">
-                    <div class="index-column-header">Securing Enterprise Scale</div>
-                    <div class="nav-item" onclick="goToSlide(6)">
-                        <div class="nav-item-title">Enterprise Costing Platform <i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="nav-item-desc">End-to-end data pipelines driving $25M ROI.</div>
+                    <!-- Column 2 -->
+                    <div class="index-column">
+                        <div class="index-column-header">Securing Enterprise Scale</div>
+                        <div class="nav-item" onclick="goToSlide(6)">
+                            <div class="nav-item-title">Enterprise Costing Platform <i class="fa-solid fa-chevron-right"></i></div>
+                            <div class="nav-item-desc">End-to-end data pipelines driving $25M ROI.</div>
+                        </div>
+                        <div class="nav-item" onclick="goToSlide(7)">
+                            <div class="nav-item-title">Tower Control Dashboard <i class="fa-solid fa-chevron-right"></i></div>
+                            <div class="nav-item-desc">Building a Single Source of Truth across Asia.</div>
+                        </div>
+                        <div class="nav-item" onclick="goToSlide(8)">
+                            <div class="nav-item-title">Eco-Packaging (ESG) <i class="fa-solid fa-chevron-right"></i></div>
+                            <div class="nav-item-desc">Tracking 15,000 SKUs to secure European compliance.</div>
+                        </div>
                     </div>
-                    <div class="nav-item" onclick="goToSlide(7)">
-                        <div class="nav-item-title">Tower Control Dashboard <i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="nav-item-desc">Building a Single Source of Truth across Asia.</div>
-                    </div>
-                    <div class="nav-item" onclick="goToSlide(8)">
-                        <div class="nav-item-title">Eco-Packaging (ESG) <i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="nav-item-desc">Tracking 15,000 SKUs to secure European compliance.</div>
-                    </div>
-                </div>
 
-                <!-- Column 3 -->
-                <div class="index-column">
-                    <div class="index-column-header">Founder DNA</div>
-                    <div class="nav-item" onclick="goToSlide(9)">
-                        <div class="nav-item-title">Rapid Prototyping <i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="nav-item-desc">Vibe-coding crisis mitigation tools for the Comex in 48 hours.</div>
-                    </div>
-                    <div class="nav-item" onclick="goToSlide(10)">
-                        <div class="nav-item-title">Hong Kong Entity & Tech <i class="fa-solid fa-chevron-right"></i></div>
-                        <div class="nav-item-desc">Independent PWA deployment and corporate incorporation.</div>
+                    <!-- Column 3 -->
+                    <div class="index-column">
+                        <div class="index-column-header">Founder DNA</div>
+                        <div class="nav-item" onclick="goToSlide(9)">
+                            <div class="nav-item-title">Rapid Prototyping <i class="fa-solid fa-chevron-right"></i></div>
+                            <div class="nav-item-desc">Vibe-coding crisis mitigation tools for the Comex in 48 hours.</div>
+                        </div>
+                        <div class="nav-item" onclick="goToSlide(10)">
+                            <div class="nav-item-title">Hong Kong Entity & Tech <i class="fa-solid fa-chevron-right"></i></div>
+                            <div class="nav-item-desc">Independent PWA deployment and corporate incorporation.</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Slide 3: The Marking Database -->
-    <div class="slide-container" id="slide3">
-        <div class="slide-header">
-            <div class="slide-category">Architecting the MVP <i class="fa-solid fa-chevron-right"></i> Product Management & Digitization</div>
-            <h2 class="slide-title">The Marking Database (Compliance Web App)</h2>
-        </div>
-        <div class="content-area">
-            <div class="parm-grid">
-                <div class="parm-card">
-                    <h3>The Problem</h3>
-                    <p>Managing mandatory compliance markings across multiple regions and product categories was highly fragmented. The enterprise needed a centralized, digitized system to ensure accurate compliance labeling and eliminate the risk of market-entry delays or legal penalties.</p>
+        <!-- Slide 3: The Marking Database -->
+        <div class="slide-container" id="slide3">
+            <div class="slide-header">
+                <div class="slide-category">Architecting the MVP <i class="fa-solid fa-chevron-right"></i> Product Management & Digitization</div>
+                <h2 class="slide-title">The Marking Database (Compliance Web App)</h2>
+            </div>
+            <div class="content-area">
+                <div class="parm-grid">
+                    <div class="parm-card">
+                        <h3>The Problem</h3>
+                        <p>Managing mandatory compliance markings across multiple regions and product categories was highly fragmented. The enterprise needed a centralized, digitized system to ensure accurate compliance labeling and eliminate the risk of market-entry delays or legal penalties.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Architecture</h3>
+                        <p>Managed the full development lifecycle for a custom compliance web app. Acted as the technical translator and product manager, bridging the gap between external IT developers and internal operational teams to architect a centralized digital database.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Impact</h3>
+                        <p>Successfully digitized over 1,000 compliance markings across 12 languages. Launched the application into production, driving daily adoption for 50 operational users to ensure frictionless global product compliance.</p>
+                    </div>
+                    <div class="parm-card map-card">
+                        <h3>The Complir Map</h3>
+                        <blockquote>"I know Complir just built this exact feature into its platform. I know the enterprise use-case inside and out because I already built the internal version of it at Carrefour. I know exactly how compliance teams will interact with this feature, what edge-cases they will encounter, and exactly how to sell it."</blockquote>
+                    </div>
                 </div>
-                <div class="parm-card">
-                    <h3>The Architecture</h3>
-                    <p>Managed the full development lifecycle for a custom compliance web app. Acted as the technical translator and product manager, bridging the gap between external IT developers and internal operational teams to architect a centralized digital database.</p>
-                </div>
-                <div class="parm-card">
-                    <h3>The Impact</h3>
-                    <p>Successfully digitized over 1,000 compliance markings across 12 languages. Launched the application into production, driving daily adoption for 50 operational users to ensure frictionless global product compliance.</p>
-                </div>
-                <div class="parm-card map-card">
-                    <h3>The Complir Map</h3>
-                    <blockquote>"I know Complir just built this exact feature into its platform. I know the enterprise use-case inside and out because I already built the internal version of it at Carrefour. I know exactly how compliance teams will interact with this feature, what edge-cases they will encounter, and exactly how to sell it."</blockquote>
+            </div>
+            <div class="slide-footer">
+                <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                    <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
-        <div class="slide-footer">
-            <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
-            <div style="display: flex; gap: 12px;">
-                <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-                <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Slide 4: Growth Market -->
-    <div class="slide-container" id="slide4">
-        <div class="slide-header">
-            <div class="slide-category">Architecting the MVP <i class="fa-solid fa-chevron-right"></i> Building the Regulatory Logic Engine</div>
-            <h2 class="slide-title">Growth Market Quality Requirements</h2>
-        </div>
-        <div class="content-area">
-            <div class="parm-grid">
-                <div class="parm-card">
-                    <h3>The Problem</h3>
-                    <p>Rapid expansion into highly complex, fragmented markets (Brazil, Vietnam, Morocco, Nigeria) lacked a centralized system to map local laws to Asian supplier outputs, creating massive customs risk.</p>
+        <!-- Slide 4: Growth Market -->
+        <div class="slide-container" id="slide4">
+            <div class="slide-header">
+                <div class="slide-category">Architecting the MVP <i class="fa-solid fa-chevron-right"></i> Building the Regulatory Logic Engine</div>
+                <h2 class="slide-title">Growth Market Quality Requirements</h2>
+            </div>
+            <div class="content-area">
+                <div class="parm-grid">
+                    <div class="parm-card">
+                        <h3>The Problem</h3>
+                        <p>Rapid expansion into highly complex, fragmented markets (Brazil, Vietnam, Morocco, Nigeria) lacked a centralized system to map local laws to Asian supplier outputs, creating massive customs risk.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Architecture</h3>
+                        <p>Studied local laws and mapped them to granular product categories. Built the exact document control matrices dictating testing standards and certificates. Engineered the risk-assessment logic to evaluate supplier non-compliance.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Impact</h3>
+                        <p>Enabled frictionless cross-border market entry for thousands of SKUs, eliminating customs blockages and protecting the enterprise from local legal penalties.</p>
+                    </div>
+                    <div class="parm-card map-card">
+                        <h3>The Complir Map</h3>
+                        <blockquote>"I spent years manually building the exact regulatory logic trees and risk-analysis frameworks Complir’s AI is designed to automate. I can help finalize the MVP to perfectly match how enterprise compliance officers actually operate."</blockquote>
+                    </div>
                 </div>
-                <div class="parm-card">
-                    <h3>The Architecture</h3>
-                    <p>Studied local laws and mapped them to granular product categories. Built the exact document control matrices dictating testing standards and certificates. Engineered the risk-assessment logic to evaluate supplier non-compliance.</p>
-                </div>
-                <div class="parm-card">
-                    <h3>The Impact</h3>
-                    <p>Enabled frictionless cross-border market entry for thousands of SKUs, eliminating customs blockages and protecting the enterprise from local legal penalties.</p>
-                </div>
-                <div class="parm-card map-card">
-                    <h3>The Complir Map</h3>
-                    <blockquote>"I spent years manually building the exact regulatory logic trees and risk-analysis frameworks Complir’s AI is designed to automate. I can help finalize the MVP to perfectly match how enterprise compliance officers actually operate."</blockquote>
+            </div>
+            <div class="slide-footer">
+                <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                    <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
-        <div class="slide-footer">
-            <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
-            <div style="display: flex; gap: 12px;">
-                <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-                <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Slide 5: The REP File -->
-    <div class="slide-container" id="slide5">
-        <div class="slide-header">
-            <div class="slide-category">Architecting the MVP <i class="fa-solid fa-chevron-right"></i> Automating the Compliance Backend</div>
-            <h2 class="slide-title">The REP File & Eco-Tax Decision Tree</h2>
-        </div>
-        <div class="content-area">
-            <div class="parm-grid">
-                <div class="parm-card">
-                    <h3>The Problem</h3>
-                    <p>European Eco-taxes are a nightmare of complex logic, requiring massive manual data input from cross-functional teams to determine correct tax brackets for products shipped to France.</p>
+        <!-- Slide 5: The REP File -->
+        <div class="slide-container" id="slide5">
+            <div class="slide-header">
+                <div class="slide-category">Architecting the MVP <i class="fa-solid fa-chevron-right"></i> Automating the Compliance Backend</div>
+                <h2 class="slide-title">The REP File & Eco-Tax Decision Tree</h2>
+            </div>
+            <div class="content-area">
+                <div class="parm-grid">
+                    <div class="parm-card">
+                        <h3>The Problem</h3>
+                        <p>European Eco-taxes are a nightmare of complex logic, requiring massive manual data input from cross-functional teams to determine correct tax brackets for products shipped to France.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Architecture</h3>
+                        <p>Built an automated workflow using App Scripts and Big Query. Engineered a dynamic decision tree that parsed user inputs against product composition to automatically assign the correct tax status.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Impact</h3>
+                        <p>Replaced manual, error-prone data entry with a centralized, automated logic engine, establishing a Single Source of Truth (SSOT) for European Eco-tax compliance.</p>
+                    </div>
+                    <div class="parm-card map-card">
+                        <h3>The Complir Map</h3>
+                        <blockquote>"I know how to build the logic gates. If a product has X material and ships to Y country, it requires Z document. I built these decision trees manually—I know exactly how to help your engineers train the AI to do it instantly."</blockquote>
+                    </div>
                 </div>
-                <div class="parm-card">
-                    <h3>The Architecture</h3>
-                    <p>Built an automated workflow using App Scripts and Big Query. Engineered a dynamic decision tree that parsed user inputs against product composition to automatically assign the correct tax status.</p>
-                </div>
-                <div class="parm-card">
-                    <h3>The Impact</h3>
-                    <p>Replaced manual, error-prone data entry with a centralized, automated logic engine, establishing a Single Source of Truth (SSOT) for European Eco-tax compliance.</p>
-                </div>
-                <div class="parm-card map-card">
-                    <h3>The Complir Map</h3>
-                    <blockquote>"I know how to build the logic gates. If a product has X material and ships to Y country, it requires Z document. I built these decision trees manually—I know exactly how to help your engineers train the AI to do it instantly."</blockquote>
+            </div>
+            <div class="slide-footer">
+                <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                    <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
-        <div class="slide-footer">
-            <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
-            <div style="display: flex; gap: 12px;">
-                <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-                <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Slide 6: Enterprise Costing Platform -->
-    <div class="slide-container" id="slide6">
-        <div class="slide-header">
-            <div class="slide-category">Securing Enterprise Scale <i class="fa-solid fa-chevron-right"></i> Value Realization & Data Pipelines</div>
-            <h2 class="slide-title">Enterprise Costing Platform ($25M ROI)</h2>
-        </div>
-        <div class="content-area">
-            <div class="parm-grid">
-                <div class="parm-card">
-                    <h3>The Problem</h3>
-                    <p>Cost breakdowns were heavily manual and limited in scope, preventing the executive board from tracking market evolution and analyzing purchasing performance. The enterprise needed a scalable system to establish a "Hardline index" against market fluctuations.</p>
+        <!-- Slide 6: Enterprise Costing Platform -->
+        <div class="slide-container" id="slide6">
+            <div class="slide-header">
+                <div class="slide-category">Securing Enterprise Scale <i class="fa-solid fa-chevron-right"></i> Value Realization & Data Pipelines</div>
+                <h2 class="slide-title">Enterprise Costing Platform ($25M ROI)</h2>
+            </div>
+            <div class="content-area">
+                <div class="parm-grid">
+                    <div class="parm-card">
+                        <h3>The Problem</h3>
+                        <p>Cost breakdowns were heavily manual and limited in scope, preventing the executive board from tracking market evolution and analyzing purchasing performance. The enterprise needed a scalable system to establish a "Hardline index" against market fluctuations.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Architecture</h3>
+                        <p>Co-built an automated, end-to-end data pipeline where supplier file uploads triggered AppScripts to merge with live API market data (Expana). Designed the technical specifications, calculations, and automated validation dashboards through AppSheet into Tableau.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Impact</h3>
+                        <p>Co-led the technical design and global rollout of this digital costing platform across 5 countries. Enabled merchandisers to secure over $25M in negotiation savings across 15,000+ SKUs and 1,000+ suppliers. Automated a monthly Comex Cost Driver newsletter.</p>
+                    </div>
+                    <div class="parm-card map-card">
+                        <h3>The Complir Map</h3>
+                        <blockquote>"I bridge the gap between technical IT teams and procurement stakeholders. I know how to extract raw, messy supplier data, run automated validation, and turn it into enterprise dashboards that drive massive ROI. I can build this exact value proposition into Complir's GTM strategy."</blockquote>
+                    </div>
                 </div>
-                <div class="parm-card">
-                    <h3>The Architecture</h3>
-                    <p>Co-built an automated, end-to-end data pipeline where supplier file uploads triggered AppScripts to merge with live API market data (Expana). Designed the technical specifications, calculations, and automated validation dashboards through AppSheet into Tableau.</p>
-                </div>
-                <div class="parm-card">
-                    <h3>The Impact</h3>
-                    <p>Co-led the technical design and global rollout of this digital costing platform across 5 countries. Enabled merchandisers to secure over $25M in negotiation savings across 15,000+ SKUs and 1,000+ suppliers. Automated a monthly Comex Cost Driver newsletter.</p>
-                </div>
-                <div class="parm-card map-card">
-                    <h3>The Complir Map</h3>
-                    <blockquote>"I bridge the gap between technical IT teams and procurement stakeholders. I know how to extract raw, messy supplier data, run automated validation, and turn it into enterprise dashboards that drive massive ROI. I can build this exact value proposition into Complir's GTM strategy."</blockquote>
+            </div>
+            <div class="slide-footer">
+                <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                    <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
-        <div class="slide-footer">
-            <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
-            <div style="display: flex; gap: 12px;">
-                <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-                <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Slide 7: Tower Control Dashboard -->
-    <div class="slide-container" id="slide7">
-        <div class="slide-header">
-            <div class="slide-category">Securing Enterprise Scale <i class="fa-solid fa-chevron-right"></i> Enterprise Scale & Data Architecture</div>
-            <h2 class="slide-title">The Tower Control Dashboard (SSOT)</h2>
-        </div>
-        <div class="content-area">
-            <div class="parm-grid">
-                <div class="parm-card">
-                    <h3>The Problem</h3>
-                    <p>Fragmented, siloed data across hundreds of Asian factories regarding quality costs, audits, inspections, and claims made it impossible for EU leadership to have real-time visibility or a Single Source of Truth (SSOT).</p>
+        <!-- Slide 7: Tower Control Dashboard -->
+        <div class="slide-container" id="slide7">
+            <div class="slide-header">
+                <div class="slide-category">Securing Enterprise Scale <i class="fa-solid fa-chevron-right"></i> Enterprise Scale & Data Architecture</div>
+                <h2 class="slide-title">The Tower Control Dashboard (SSOT)</h2>
+            </div>
+            <div class="content-area">
+                <div class="parm-grid">
+                    <div class="parm-card">
+                        <h3>The Problem</h3>
+                        <p>Fragmented, siloed data across hundreds of Asian factories regarding quality costs, audits, inspections, and claims made it impossible for EU leadership to have real-time visibility or a Single Source of Truth (SSOT).</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Architecture</h3>
+                        <p>Architected a "Tower Control" dashboard to consolidate multi-regional supply chain data. Harmonized cross-border practices, standardized audit and inspection reporting, and built a unified data architecture connecting the factory floor to the executive suite.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Impact</h3>
+                        <p>Transformed chaotic, decentralized factory reporting into a unified SSOT, allowing EU headquarters to track quality costs, claims, and compliance metrics in real-time across the entire Asian sourcing network.</p>
+                    </div>
+                    <div class="parm-card map-card">
+                        <h3>The Complir Map</h3>
+                        <blockquote>"Enterprise clients don't just want a compliance tool; they want a Single Source of Truth. I've built the data harmonization architecture required to manage thousands of suppliers at scale. I know exactly what dashboards Tier-1 retail executives need to see to justify buying Complir."</blockquote>
+                    </div>
                 </div>
-                <div class="parm-card">
-                    <h3>The Architecture</h3>
-                    <p>Architected a "Tower Control" dashboard to consolidate multi-regional supply chain data. Harmonized cross-border practices, standardized audit and inspection reporting, and built a unified data architecture connecting the factory floor to the executive suite.</p>
-                </div>
-                <div class="parm-card">
-                    <h3>The Impact</h3>
-                    <p>Transformed chaotic, decentralized factory reporting into a unified SSOT, allowing EU headquarters to track quality costs, claims, and compliance metrics in real-time across the entire Asian sourcing network.</p>
-                </div>
-                <div class="parm-card map-card">
-                    <h3>The Complir Map</h3>
-                    <blockquote>"Enterprise clients don't just want a compliance tool; they want a Single Source of Truth. I've built the data harmonization architecture required to manage thousands of suppliers at scale. I know exactly what dashboards Tier-1 retail executives need to see to justify buying Complir."</blockquote>
+            </div>
+            <div class="slide-footer">
+                <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                    <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
-        <div class="slide-footer">
-            <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
-            <div style="display: flex; gap: 12px;">
-                <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-                <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Slide 8: Eco-Packaging Data -->
-    <div class="slide-container" id="slide8">
-        <div class="slide-header">
-            <div class="slide-category">Securing Enterprise Scale <i class="fa-solid fa-chevron-right"></i> ESG Scale & Data Validation</div>
-            <h2 class="slide-title">Eco-Packaging Data Implementation</h2>
-        </div>
-        <div class="content-area">
-            <div class="parm-grid">
-                <div class="parm-card">
-                    <h3>The Problem</h3>
-                    <p>Group-level ESG declarations, internal packaging KPIs, and strict Eco-tax requirements forced the enterprise to track thousands of data points. Previously, this reporting was largely based on assumptions rather than ground-truth facts, creating massive compliance risk.</p>
+        <!-- Slide 8: Eco-Packaging Data -->
+        <div class="slide-container" id="slide8">
+            <div class="slide-header">
+                <div class="slide-category">Securing Enterprise Scale <i class="fa-solid fa-chevron-right"></i> ESG Scale & Data Validation</div>
+                <h2 class="slide-title">Eco-Packaging Data Implementation</h2>
+            </div>
+            <div class="content-area">
+                <div class="parm-grid">
+                    <div class="parm-card">
+                        <h3>The Problem</h3>
+                        <p>Group-level ESG declarations, internal packaging KPIs, and strict Eco-tax requirements forced the enterprise to track thousands of data points. Previously, this reporting was largely based on assumptions rather than ground-truth facts, creating massive compliance risk.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Architecture</h3>
+                        <p>Engineered an automated data pipeline where supplier Excel uploads are parsed via email automation directly into a centralized database. Built the internal workflow to validate supplier inputs, architecting the transition to a robust 3rd-party system for validation.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Impact</h3>
+                        <p>Replaced assumption-based reporting with a high-confidence, fact-based data ecosystem. Radically improved the accuracy, visibility, and auditability of corporate ESG and tax declarations across the entire Asian supply chain enterprise.</p>
+                    </div>
+                    <div class="parm-card map-card">
+                        <h3>The Complir Map</h3>
+                        <blockquote>"Complir's core value is moving enterprises from assumption-based compliance to ground-truth data. I have built the exact workflows needed to ingest, validate, and trust thousands of ESG data points directly from Asian factories."</blockquote>
+                    </div>
                 </div>
-                <div class="parm-card">
-                    <h3>The Architecture</h3>
-                    <p>Engineered an automated data pipeline where supplier Excel uploads are parsed via email automation directly into a centralized database. Built the internal workflow to validate supplier inputs, architecting the transition to a robust 3rd-party system for validation.</p>
-                </div>
-                <div class="parm-card">
-                    <h3>The Impact</h3>
-                    <p>Replaced assumption-based reporting with a high-confidence, fact-based data ecosystem. Radically improved the accuracy, visibility, and auditability of corporate ESG and tax declarations across the entire Asian supply chain enterprise.</p>
-                </div>
-                <div class="parm-card map-card">
-                    <h3>The Complir Map</h3>
-                    <blockquote>"Complir's core value is moving enterprises from assumption-based compliance to ground-truth data. I have built the exact workflows needed to ingest, validate, and trust thousands of ESG data points directly from Asian factories."</blockquote>
+            </div>
+            <div class="slide-footer">
+                <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                    <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
-        <div class="slide-footer">
-            <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
-            <div style="display: flex; gap: 12px;">
-                <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-                <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Slide 9: Crisis Management Tooling -->
-    <div class="slide-container" id="slide9">
-        <div class="slide-header">
-            <div class="slide-category">Founder DNA <i class="fa-solid fa-chevron-right"></i> Agile Execution & Rapid Prototyping</div>
-            <h2 class="slide-title">Crisis Management Tooling (Strait of Hormuz)</h2>
-        </div>
-        <div class="content-area">
-            <div class="parm-grid">
-                <div class="parm-card">
-                    <h3>The Problem</h3>
-                    <p>The US-Iran conflict and Strait of Hormuz blockade created immediate supply chain disruption. The Carrefour Board of Directors (Comex) urgently required ground-truth field data to assess cost and timeline impacts across the Asian network.</p>
+        <!-- Slide 9: Crisis Management Tooling -->
+        <div class="slide-container" id="slide9">
+            <div class="slide-header">
+                <div class="slide-category">Founder DNA <i class="fa-solid fa-chevron-right"></i> Agile Execution & Rapid Prototyping</div>
+                <h2 class="slide-title">Crisis Management Tooling (Strait of Hormuz)</h2>
+            </div>
+            <div class="content-area">
+                <div class="parm-grid">
+                    <div class="parm-card">
+                        <h3>The Problem</h3>
+                        <p>The US-Iran conflict and Strait of Hormuz blockade created immediate supply chain disruption. The Carrefour Board of Directors (Comex) urgently required ground-truth field data to assess cost and timeline impacts across the Asian network.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Architecture</h3>
+                        <p>Leveraged AI ("vibe-coding" via Gemini) to rapidly prototype and deploy a custom web app using AppScript. Utilized Google Sheets as a backend database with a streamlined UI to capture real-time supplier feedback on cost increases and mitigation strategies. Automated weekly executive reporting.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Impact</h3>
+                        <p>Deployed the functional application in under 48 hours, instantly consolidating fragmented supplier data into actionable intelligence for the Carrefour Comex to make rapid executive supply chain decisions.</p>
+                    </div>
+                    <div class="parm-card map-card">
+                        <h3>The Complir Map</h3>
+                        <blockquote>"In the startup world, speed to execution is everything. I don't wait for IT to build solutions; I use AI to rapidly prototype and deploy functional tools in 48 hours. I bring this exact builder mentality and agility to Complir’s product iteration."</blockquote>
+                    </div>
                 </div>
-                <div class="parm-card">
-                    <h3>The Architecture</h3>
-                    <p>Leveraged AI ("vibe-coding" via Gemini) to rapidly prototype and deploy a custom web app using AppScript. Utilized Google Sheets as a backend database with a streamlined UI to capture real-time supplier feedback on cost increases and mitigation strategies. Automated weekly executive reporting.</p>
-                </div>
-                <div class="parm-card">
-                    <h3>The Impact</h3>
-                    <p>Deployed the functional application in under 48 hours, instantly consolidating fragmented supplier data into actionable intelligence for the Carrefour Comex to make rapid executive supply chain decisions.</p>
-                </div>
-                <div class="parm-card map-card">
-                    <h3>The Complir Map</h3>
-                    <blockquote>"In the startup world, speed to execution is everything. I don't wait for IT to build solutions; I use AI to rapidly prototype and deploy functional tools in 48 hours. I bring this exact builder mentality and agility to Complir’s product iteration."</blockquote>
+            </div>
+            <div class="slide-footer">
+                <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                    <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         </div>
-        <div class="slide-footer">
-            <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
-            <div style="display: flex; gap: 12px;">
-                <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-                <button class="btn-nav" onclick="nextSlide()">Next Project <i class="fa-solid fa-arrow-right"></i></button>
-            </div>
-        </div>
-    </div>
 
-    <!-- Slide 10: Founder DNA -->
-    <div class="slide-container" id="slide10">
-        <div class="slide-header">
-            <div class="slide-category">Founder DNA <i class="fa-solid fa-chevron-right"></i> Entrepreneurial Execution & Tech Stack</div>
-            <h2 class="slide-title">Founder DNA (Fai-D App & HK Entity Setup)</h2>
-        </div>
-        <div class="content-area">
-            <div class="parm-grid">
-                <div class="parm-card">
-                    <h3>The Problem</h3>
-                    <p>Identified friction in the Hong Kong transit ecosystem (bloated, ad-heavy apps) and spotted a market opportunity (premium tea export), requiring immediate technical and operational execution outside of corporate structures.</p>
+        <!-- Slide 10: Founder DNA -->
+        <div class="slide-container" id="slide10">
+            <div class="slide-header">
+                <div class="slide-category">Founder DNA <i class="fa-solid fa-chevron-right"></i> Entrepreneurial Execution & Tech Stack</div>
+                <h2 class="slide-title">Founder DNA (Fai-D App & HK Entity Setup)</h2>
+            </div>
+            <div class="content-area">
+                <div class="parm-grid">
+                    <div class="parm-card">
+                        <h3>The Problem</h3>
+                        <p>Identified friction in the Hong Kong transit ecosystem (bloated, ad-heavy apps) and spotted a market opportunity (premium tea export), requiring immediate technical and operational execution outside of corporate structures.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Architecture</h3>
+                        <p>Vibe-coded "Fai-D" (a Progressive Web App for HK transit) using Gemini, Vercel, and GitHub. Concurrently navigated the complex Hong Kong administrative ecosystem to legally incorporate a private entity (Kowloon Tea), managing company secretaries, audits, and structures.</p>
+                    </div>
+                    <div class="parm-card">
+                        <h3>The Impact</h3>
+                        <p>Successfully deployed the Fai-D PWA (currently completing Google Play deployment). Gained comprehensive, firsthand operational knowledge of Hong Kong corporate incorporation, banking, and administrative setups.</p>
+                    </div>
+                    <div class="parm-card map-card">
+                        <h3>The Complir Map</h3>
+                        <blockquote>"I don't just think like an operator; I think like a founder. Whether it's rapid-prototyping an app with Vercel and AI, or navigating the friction of incorporating a Hong Kong entity from scratch, I have the exact execution DNA needed to independently launch Complir's APAC hub."</blockquote>
+                    </div>
                 </div>
-                <div class="parm-card">
-                    <h3>The Architecture</h3>
-                    <p>Vibe-coded "Fai-D" (a Progressive Web App for HK transit) using Gemini, Vercel, and GitHub. Concurrently navigated the complex Hong Kong administrative ecosystem to legally incorporate a private entity (Kowloon Tea), managing company secretaries, audits, and structures.</p>
-                </div>
-                <div class="parm-card">
-                    <h3>The Impact</h3>
-                    <p>Successfully deployed the Fai-D PWA (currently completing Google Play deployment). Gained comprehensive, firsthand operational knowledge of Hong Kong corporate incorporation, banking, and administrative setups.</p>
-                </div>
-                <div class="parm-card map-card">
-                    <h3>The Complir Map</h3>
-                    <blockquote>"I don't just think like an operator; I think like a founder. Whether it's rapid-prototyping an app with Vercel and AI, or navigating the friction of incorporating a Hong Kong entity from scratch, I have the exact execution DNA needed to independently launch Complir's APAC hub."</blockquote>
+            </div>
+            <div class="slide-footer">
+                <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
+                    <button class="btn-nav" disabled style="opacity: 0.5; cursor: not-allowed;">End of Portfolio</button>
                 </div>
             </div>
         </div>
-        <div class="slide-footer">
-            <button class="btn-nav" onclick="goToSlide(2)"><i class="fa-solid fa-table-cells-large"></i> Dashboard</button>
-            <div style="display: flex; gap: 12px;">
-                <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-arrow-left"></i> Previous</button>
-                <button class="btn-nav" disabled style="opacity: 0.5; cursor: not-allowed;">End of Portfolio</button>
-            </div>
-        </div>
-    </div>
+
+    </div> <!-- End Deck Wrapper -->
 
     <script>
         // Presentation Logic Engine
@@ -706,43 +724,35 @@
         const totalSlides = 10;
 
         function showSlide(index) {
-            // Hide all slides
             document.querySelectorAll('.slide-container').forEach(slide => {
                 slide.classList.remove('active');
             });
-            // Show target slide
             document.getElementById('slide' + index).classList.add('active');
             currentSlide = index;
         }
 
-        function nextSlide() {
-            if (currentSlide < totalSlides) {
-                showSlide(currentSlide + 1);
-            }
-        }
+        function nextSlide() { if (currentSlide < totalSlides) showSlide(currentSlide + 1); }
+        function prevSlide() { if (currentSlide > 1) showSlide(currentSlide - 1); }
+        function goToSlide(index) { if (index >= 1 && index <= totalSlides) showSlide(index); }
 
-        function prevSlide() {
-            if (currentSlide > 1) {
-                showSlide(currentSlide - 1);
-            }
-        }
-
-        function goToSlide(index) {
-            if (index >= 1 && index <= totalSlides) {
-                showSlide(index);
-            }
-        }
-
-        // Add keyboard navigation (Right Arrow = Next, Left Arrow = Prev, Esc = Dashboard)
         document.addEventListener('keydown', function(event) {
-            if (event.key === "ArrowRight") {
-                nextSlide();
-            } else if (event.key === "ArrowLeft") {
-                prevSlide();
-            } else if (event.key === "Escape") {
-                goToSlide(2); // Go to dashboard
-            }
+            if (event.key === "ArrowRight") nextSlide();
+            else if (event.key === "ArrowLeft") prevSlide();
+            else if (event.key === "Escape") goToSlide(2);
         });
+
+        // The Dynamic Auto-Scaler
+        function scaleDeck() {
+            const wrapper = document.getElementById('deck-wrapper');
+            // Calculate scale needed to fit the window with a 5% margin
+            const scale = Math.min(window.innerWidth / 1280, window.innerHeight / 720) * 0.95;
+            wrapper.style.transform = `scale(${scale})`;
+        }
+
+        // Trigger scaler on load and whenever screen resizes/rotates
+        window.addEventListener('resize', scaleDeck);
+        window.addEventListener('orientationchange', scaleDeck);
+        scaleDeck();
     </script>
 </body>
 </html>
