@@ -98,13 +98,13 @@
         // Core Data Structure: Layer 0 -> Layer 1 -> Layer 2
         const portfolioData = [
             {
-                name: 'RG - Me',
+                name: 'ME',
                 itemStyle: { color: '#0f172a' }, // Slate 900 for a bold center
                 details: {
-                    name: "Romain Gaumont",
+                    name: "Your Name",
                     title: "Enterprise Architect & Operator",
                     background: "13 years building the manual frameworks Complir is now automating. Bridging the gap between technical IT and corporate execution.",
-                    education: "Mechanical Engineer • UTBM • Certifications"
+                    education: "Your Degree • Your University • Certifications"
                 },
                 children: [
                     // --- LAYER 1: COMPLIANCE ---
@@ -131,7 +131,7 @@
                                 }
                             },
                             {
-                                name: 'Logic\nEngine',
+                                name: 'Logic Engine',
                                 value: 1,
                                 itemStyle: { color: '#93c5fd' },
                                 details: {
@@ -220,7 +220,7 @@
                         },
                         children: [
                             {
-                                name: 'Crisis',
+                                name: 'Crisis Tooling',
                                 value: 2, 
                                 itemStyle: { color: '#a78bfa' },
                                 details: {
@@ -233,7 +233,7 @@
                                 }
                             },
                             {
-                                name: 'Venture',
+                                name: 'Venture Build',
                                 value: 2,
                                 itemStyle: { color: '#c4b5fd' },
                                 details: {
@@ -261,13 +261,14 @@
                     const data = info.data;
                     const level = info.treePathInfo.length;
 
-                    // Level 2 (Layer 0): "RG - Me" Center Node
+                    // Level 2 (Layer 0): "ME" Center Node
                     if (level === 2) {
                         return `
                         <div class="bg-white/95 backdrop-blur-md shadow-2xl rounded-2xl p-6 w-[350px] border border-slate-100 font-sans pointer-events-none">
                             <div class="flex items-center gap-4 mb-4">
-                                <div class="w-14 h-14 rounded-full bg-slate-100 border-2 border-slate-200 flex items-center justify-center overflow-hidden shrink-0">
-                                    <i class="fa-solid fa-user-tie text-2xl text-slate-400"></i>
+                                <div class="w-16 h-16 rounded-full bg-slate-100 border-2 border-slate-200 flex items-center justify-center overflow-hidden shrink-0">
+                                    <!-- REPLACE YOUR_GITHUB_IMAGE_URL_HERE WITH YOUR ACTUAL RAW GITHUB URL -->
+                                    <img src="https://github.com/fabboulier-rgb/Pitch-me/blob/main/Screenshot%202026-06-17%20224043.jpg" onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=ME&background=e2e8f0&color=475569';" alt="Profile" class="w-full h-full object-cover" />
                                 </div>
                                 <div>
                                     <h3 class="text-xl font-black text-slate-900">${data.details.name}</h3>
@@ -365,7 +366,8 @@
                     color: '#ffffff',
                     textBorderColor: 'rgba(0,0,0,0.1)',
                     textBorderWidth: 1,
-                    lineHeight: 16,
+                    lineHeight: 14,
+                    rotate: 0 // Forces all labels to be horizontally oriented
                 },
                 levels: [
                     {}, // Virtual Root
@@ -379,7 +381,7 @@
                             fontSize: 26,
                             fontWeight: '900',
                             color: '#ffffff',
-                            textBorderWidth: 0
+                            textBorderWidth: 0,
                         },
                         itemStyle: {
                             shadowBlur: 20,
@@ -395,7 +397,9 @@
                             align: 'center',
                             fontSize: 13,
                             fontWeight: '800',
-                            letterSpacing: 1
+                            letterSpacing: 1,
+                            width: 80,          // Sets maximum width
+                            overflow: 'break'   // Enables text wrapping based on the width
                         }
                     },
                     {
@@ -406,7 +410,9 @@
                             position: 'inner',
                             align: 'center',
                             fontSize: 11,
-                            fontWeight: '700'
+                            fontWeight: '700',
+                            width: 65,          // Sets maximum width for smaller outer ring
+                            overflow: 'break'   // Enables text wrapping based on the width
                         },
                         itemStyle: {
                             opacity: 0.9,
