@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Execution Nexus | Interactive Portfolio</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Tailwind CSS for modern, rapid UI styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Apache ECharts for the interactive nested radial visualization -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* ECharts overrides to ensure our custom HTML tooltip renders perfectly */
+        .echarts-tooltip {
+            white-space: normal !important;
+            box-shadow: none !important;
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        /* Subtle pulse animation for the header icon */
+        @keyframes subtlePulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+        .pulse-icon {
+            animation: subtlePulse 3s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen text-slate-800">
+
+    <!-- Header Overlay -->
+    <div class="absolute top-0 left-0 w-full p-8 z-10 pointer-events-none flex justify-between items-start">
+        <div class="pointer-events-auto max-w-xl">
+            <div class="flex items-center gap-3 mb-2">
+                <div class="w-10 h-10 rounded-lg bg-brand-600 text-white flex items-center justify-center shadow-lg pulse-icon">
+                    <i class="fa-solid fa-layer-group text-xl"></i>
+                </div>
+                <h1 class="text-3xl font-extrabold tracking-tight text-slate-900">The Execution Nexus</h1>
+            </div>
+            <p class="text-slate-600 font-medium text-lg mb-1">Architecting Enterprise Compliance & Data Automation</p>
+            <p class="text-slate-500 text-sm">13 years of building the exact frameworks Complir is now automating.</p>
+        </div>
+
+        <div class="pointer-events-auto hidden md:flex flex-col items-end">
+            <div class="bg-white/80 backdrop-blur shadow-sm border border-slate-200 rounded-full px-5 py-2.5 flex items-center gap-3">
+                <i class="fa-solid fa-mouse-pointer text-brand-600 animate-bounce"></i>
+                <span class="text-sm font-semibold text-slate-700">Hover over the rings to explore projects</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart Container -->
+    <div id="chart-container" class="w-full flex-grow flex items-center justify-center min-h-[600px] mt-10 md:mt-0"></div>
+
+    <script>
+        // Initialize ECharts
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+
+        // Core Data Structure: Layer 0 -> Layer 1 -> Layer 2
+        const portfolioData = [
+            {
+                name: 'ME',
+                itemStyle: { color: '#0f172a' }, // Slate 900 for a bold center
+                details: {
+                    name: "Your Name",
+                    title: "Enterprise Architect & Operator",
+                    background: "13 years building the manual frameworks Complir is now automating. Bridging the gap between technical IT and corporate execution.",
+                    education: "Your Degree • Your University • Certifications"
+                },
+                children: [
+                    // --- LAYER 1: COMPLIANCE ---
+                    {
+                        name: 'Compliance',
+                        itemStyle: { color: '#3b82f6' }, // Blue
+                        details: {
+                            title: 'Enterprise Compliance',
+                            desc: "Navigating global regulations, digitization, and establishing robust operational frameworks.",
+                            skills: ["Regulatory Logic", "ESG Tracking", "Logic Matrix Mapping"]
+                        },
+                        children: [
+                            {
+                                name: 'Database',
+                                value: 1,
+                                itemStyle: { color: '#60a5fa' },
+                                details: {
+                                    title: 'The Marking Database',
+                                    category: "Product Management & Digitization",
+                                    problem: "Managing mandatory compliance markings across multiple regions was highly fragmented, creating massive market-entry risks.",
+                                    architecture: "Managed the full development lifecycle. Acted as technical translator bridging external IT and internal ops to architect a centralized digital database.",
+                                    impact: "Digitized 1,000+ compliance markings across 12 languages. 50 daily operational users ensuring frictionless global compliance.",
+                                    quote: "I know Complir just built this exact feature into its platform. I know the enterprise use-case inside and out because I already built the internal version of it."
+                                }
+                            },
+                            {
+                                name: 'Logic\nEngine',
+                                value: 1,
+                                itemStyle: { color: '#93c5fd' },
+                                details: {
+                                    title: 'Growth Market Engine',
+                                    category: "Building the Regulatory Logic Engine",
+                                    problem: "Rapid expansion into complex markets lacked a centralized system to map local laws to Asian supplier outputs.",
+                                    architecture: "Mapped local laws to granular product categories. Built document control matrices and engineered risk-assessment logic to evaluate non-compliance.",
+                                    impact: "Enabled frictionless cross-border market entry for thousands of SKUs, eliminating customs blockages.",
+                                    quote: "I spent years manually building the exact regulatory logic trees and risk-analysis frameworks Complir’s AI is designed to automate."
+                                }
+                            },
+                            {
+                                name: 'Eco-Tax',
+                                value: 1,
+                                itemStyle: { color: '#bfdbfe' },
+                                details: {
+                                    title: 'The REP File',
+                                    category: "Automating the Compliance Backend",
+                                    problem: "European Eco-taxes required massive manual data input from cross-functional teams to determine correct tax brackets.",
+                                    architecture: "Built an automated workflow using App Scripts and Big Query. Engineered a dynamic decision tree to automatically assign tax status based on product composition.",
+                                    impact: "Replaced manual data entry with an automated logic engine, establishing a Single Source of Truth (SSOT).",
+                                    quote: "I know how to build the logic gates. I built these decision trees manually—I know exactly how to help your engineers train the AI to do it instantly."
+                                }
+                            },
+                            {
+                                name: 'ESG',
+                                value: 1,
+                                itemStyle: { color: '#dbeafe' },
+                                details: {
+                                    title: 'Eco-Packaging (ESG)',
+                                    category: "ESG Scale & Data Validation",
+                                    problem: "Strict ESG and Eco-tax reporting was largely based on assumptions rather than ground-truth facts, creating massive compliance risk.",
+                                    architecture: "Engineered a pipeline parsing supplier Excel uploads directly into a centralized database, architecting the transition to 3rd-party validation.",
+                                    impact: "Replaced assumption-based reporting with a high-confidence, fact-based data ecosystem.",
+                                    quote: "Complir's core value is moving enterprises from assumption-based compliance to ground-truth data. I have built the exact workflows needed to do this."
+                                }
+                            }
+                        ]
+                    },
+                    // --- LAYER 1: DESIGN ---
+                    {
+                        name: 'Design',
+                        itemStyle: { color: '#10b981' }, // Emerald
+                        details: {
+                            title: 'Architecture & Design',
+                            desc: "Designing data pipelines, Single Sources of Truth (SSOT), and enterprise dashboards.",
+                            skills: ["Data Pipelines", "UI/UX Dashboards", "Value Realization"]
+                        },
+                        children: [
+                            {
+                                name: 'Costing',
+                                value: 2, // Doubled weight to balance the half-circle visually
+                                itemStyle: { color: '#34d399' },
+                                details: {
+                                    title: 'Enterprise Costing Platform',
+                                    category: "Value Realization & Data Pipelines",
+                                    problem: "Cost breakdowns were heavily manual, preventing the executive board from tracking market evolution and purchasing performance.",
+                                    architecture: "Co-built an automated end-to-end data pipeline merging supplier uploads with live API market data via AppScripts and Tableau.",
+                                    impact: "Secured over $25M in negotiation savings across 15,000+ SKUs and 1,000+ suppliers.",
+                                    quote: "I know how to extract raw, messy supplier data, run automated validation, and turn it into enterprise dashboards that drive massive ROI."
+                                }
+                            },
+                            {
+                                name: 'SSOT',
+                                value: 2,
+                                itemStyle: { color: '#6ee7b7' },
+                                details: {
+                                    title: 'Tower Control Dashboard',
+                                    category: "Enterprise Scale & Data Architecture",
+                                    problem: "Fragmented data across hundreds of Asian factories made it impossible for EU leadership to have a Single Source of Truth (SSOT).",
+                                    architecture: "Architected a dashboard to consolidate multi-regional data, standardizing audits and building a unified data architecture.",
+                                    impact: "Transformed chaotic reporting into a unified SSOT for EU HQ to track quality costs and claims in real-time.",
+                                    quote: "Enterprise clients don't just want a compliance tool; they want a Single Source of Truth. I know exactly what dashboards Tier-1 executives need to see."
+                                }
+                            }
+                        ]
+                    },
+                    // --- LAYER 1: ENTREPRENEUR ---
+                    {
+                        name: 'Entrepreneur',
+                        itemStyle: { color: '#8b5cf6' }, // Violet
+                        details: {
+                            title: 'Entrepreneurial Execution',
+                            desc: "Agile execution, rapid prototyping, and independent venture building.",
+                            skills: ["AI-Assisted Coding", "Entity Incorporation", "Crisis Management"]
+                        },
+                        children: [
+                            {
+                                name: 'Crisis',
+                                value: 2, 
+                                itemStyle: { color: '#a78bfa' },
+                                details: {
+                                    title: 'Crisis Tooling (Hormuz)',
+                                    category: "Agile Execution & Rapid Prototyping",
+                                    problem: "The Strait of Hormuz blockade created urgent supply chain disruption. The Board of Directors needed ground-truth field data instantly.",
+                                    architecture: "Vibe-coded via Gemini to rapidly prototype a custom AppScript web app, capturing real-time supplier feedback.",
+                                    impact: "Deployed in under 48 hours, instantly consolidating fragmented data into actionable intelligence for executive decisions.",
+                                    quote: "In the startup world, speed to execution is everything. I don't wait for IT; I use AI to rapidly prototype. I bring this builder mentality to Complir."
+                                }
+                            },
+                            {
+                                name: 'Venture',
+                                value: 2,
+                                itemStyle: { color: '#c4b5fd' },
+                                details: {
+                                    title: 'HK Entity & Tech',
+                                    category: "Entrepreneurial Execution & Tech Stack",
+                                    problem: "Identified friction in Hong Kong transit apps and needed an independent entity to execute technical solutions.",
+                                    architecture: "Vibe-coded 'Fai-D' (a PWA for transit) using Vercel. Navigated the HK ecosystem to legally incorporate a private entity from scratch.",
+                                    impact: "Deployed the PWA and gained comprehensive, firsthand operational knowledge of HK corporate incorporation and banking.",
+                                    quote: "I don't just think like an operator; I think like a founder. I have the exact execution DNA needed to independently launch Complir's APAC hub."
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // Chart Configuration
+        const option = {
+            tooltip: {
+                trigger: 'item',
+                confine: true, // keeps tooltip inside the screen
+                className: 'echarts-tooltip',
+                formatter: function (info) {
+                    const data = info.data;
+                    const level = info.treePathInfo.length;
+
+                    // Level 2 (Layer 0): "ME" Center Node
+                    if (level === 2) {
+                        return `
+                        <div class="bg-white/95 backdrop-blur-md shadow-2xl rounded-2xl p-6 w-[350px] border border-slate-100 font-sans pointer-events-none">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-14 h-14 rounded-full bg-slate-100 border-2 border-slate-200 flex items-center justify-center overflow-hidden shrink-0">
+                                    <i class="fa-solid fa-user-tie text-2xl text-slate-400"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-black text-slate-900">${data.details.name}</h3>
+                                    <p class="text-sm font-bold text-brand-600">${data.details.title}</p>
+                                </div>
+                            </div>
+                            <div class="space-y-3">
+                                <div>
+                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Background</h4>
+                                    <p class="text-sm text-slate-700 leading-relaxed">${data.details.background}</p>
+                                </div>
+                                <div class="pt-2 border-t border-slate-100">
+                                    <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">Education</h4>
+                                    <p class="text-sm text-slate-700 font-medium">${data.details.education}</p>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    }
+
+                    // Level 3 (Layer 1): The 3 Core Competencies
+                    if (level === 3) {
+                        const skillsHtml = data.details.skills.map(s => 
+                            `<span class="inline-block bg-slate-100 text-slate-700 text-xs px-2 py-1 rounded-md mb-1 mr-1">${s}</span>`
+                        ).join('');
+
+                        return `
+                        <div class="bg-white/95 backdrop-blur-md shadow-2xl rounded-2xl p-5 w-[320px] border border-slate-100 font-sans pointer-events-none">
+                            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">Core Pillar</h3>
+                            <h2 class="text-2xl font-black text-slate-900 mb-2 leading-tight">${data.details.title}</h2>
+                            <p class="text-slate-600 text-sm mb-4">${data.details.desc}</p>
+                            <div class="border-t border-slate-100 pt-3">
+                                ${skillsHtml}
+                            </div>
+                        </div>
+                        `;
+                    }
+
+                    // Level 4 (Layer 2): Actual Projects
+                    if (level === 4) {
+                        const d = data.details;
+                        // Determine colors based on the parent category (treePathInfo[2] is the Pillar)
+                        const parentName = info.treePathInfo[2].name;
+                        const colorClass = parentName === 'Compliance' ? 'text-blue-600' : 
+                                           parentName === 'Design' ? 'text-emerald-600' : 'text-violet-600';
+                        const bgQuote = parentName === 'Compliance' ? 'bg-blue-50 border-blue-400 text-blue-900' : 
+                                        parentName === 'Design' ? 'bg-emerald-50 border-emerald-400 text-emerald-900' : 'bg-violet-50 border-violet-400 text-violet-900';
+
+                        return `
+                        <div class="bg-white/98 backdrop-blur-xl shadow-2xl rounded-2xl p-6 w-[420px] border border-slate-200 font-sans pointer-events-none whitespace-normal">
+                            <h4 class="text-xs uppercase tracking-widest ${colorClass} font-bold mb-2">${d.category}</h4>
+                            <h3 class="text-2xl font-extrabold text-slate-900 mb-4 leading-tight">${data.details.title}</h3>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">The Problem</h5>
+                                    <p class="text-sm text-slate-700 leading-relaxed">${d.problem}</p>
+                                </div>
+                                
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">The Impact</h5>
+                                    <p class="text-sm text-slate-700 leading-relaxed font-medium">${d.impact}</p>
+                                </div>
+
+                                <div class="mt-4 pt-4 border-t border-slate-100">
+                                    <h5 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1">
+                                        <i class="fa-solid fa-map-location-dot"></i> The Complir Map
+                                    </h5>
+                                    <blockquote class="border-l-4 pl-3 py-2 rounded-r-lg italic text-sm ${bgQuote} font-medium leading-relaxed">
+                                        "${d.quote}"
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    }
+                    return '';
+                }
+            },
+            series: {
+                type: 'sunburst',
+                data: portfolioData,
+                radius: ['0%', '85%'], // Changed inner radius to 0% to allow solid center circle
+                center: ['50%', '55%'],
+                sort: null,
+                itemStyle: {
+                    borderWidth: 3,
+                    borderColor: '#f8fafc', 
+                    borderRadius: 8
+                },
+                label: {
+                    formatter: function (info) {
+                        return info.name;
+                    },
+                    color: '#ffffff',
+                    textBorderColor: 'rgba(0,0,0,0.1)',
+                    textBorderWidth: 1,
+                    lineHeight: 16,
+                },
+                levels: [
+                    {}, // Virtual Root
+                    {
+                        // Layer 0: "ME" Center Circle
+                        r0: '0%',
+                        r: '18%', 
+                        label: {
+                            position: 'inner', // Puts text perfectly in center
+                            formatter: 'ME',
+                            fontSize: 26,
+                            fontWeight: '900',
+                            color: '#ffffff',
+                            textBorderWidth: 0
+                        },
+                        itemStyle: {
+                            shadowBlur: 20,
+                            shadowColor: 'rgba(0,0,0,0.1)'
+                        }
+                    },
+                    {
+                        // Layer 1: Core Keywords (Compliance, Design, Entrepreneur)
+                        r0: '22%', 
+                        r: '45%',
+                        label: {
+                            position: 'inner',
+                            align: 'center',
+                            fontSize: 13,
+                            fontWeight: '800',
+                            letterSpacing: 1
+                        }
+                    },
+                    {
+                        // Layer 2: Projects
+                        r0: '48%', 
+                        r: '85%',
+                        label: {
+                            position: 'inner',
+                            align: 'center',
+                            fontSize: 11,
+                            fontWeight: '700'
+                        },
+                        itemStyle: {
+                            opacity: 0.9,
+                            shadowBlur: 10,
+                            shadowColor: 'rgba(0,0,0,0.05)'
+                        }
+                    }
+                ],
+                emphasis: {
+                    focus: 'ancestor', 
+                    itemStyle: {
+                        opacity: 1,
+                        borderWidth: 4
+                    }
+                },
+                animationDurationUpdate: 500,
+                animationEasingUpdate: 'cubicInOut'
+            }
+        };
+
+        // Render chart
+        myChart.setOption(option);
+
+        // Ensure responsiveness
+        window.addEventListener('resize', () => {
+            myChart.resize();
+        });
+    </script>
+</body>
+</html>
